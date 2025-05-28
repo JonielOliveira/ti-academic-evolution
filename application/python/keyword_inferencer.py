@@ -99,4 +99,10 @@ def processar_lista_para_keywords(lista_objetos, arquivo_saida_json):
 
 # Execução
 dados = carregar_json('data/dados_amostra.json')
-processar_lista_para_keywords(dados, 'data/keywords.json')
+
+# Fatiar os registros de acordo com o intervalo desejado
+inicio = 0
+fim = 100
+dados_fatia = dados[inicio:fim]
+
+processar_lista_para_keywords(dados_fatia, f'data/keywords_{inicio}_a_{fim}.json')
