@@ -237,5 +237,6 @@ jspm_packages/
 dist/
 build/
 
-# Dados gerados automaticamente
+# Dados gerados no processo de execução da aplicação
 **/data/
+**/sample/
