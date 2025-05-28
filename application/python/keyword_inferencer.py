@@ -1,6 +1,7 @@
 import json
 import requests
 import os
+import time  # Importa para medir tempo
 
 def get_file_path(filename):
     """Retorna o caminho absoluto de um arquivo localizado na mesma pasta do script .py."""
@@ -9,15 +10,7 @@ def get_file_path(filename):
 
 
 def carregar_json(arquivo_json):
-    """
-    Carrega e retorna o conteúdo de um arquivo JSON.
-
-    Parâmetros:
-    - arquivo_json (str): nome do arquivo JSON.
-
-    Retorna:
-    - O conteúdo carregado (normalmente um dict ou list).
-    """
+    """Carrega e retorna o conteúdo de um arquivo JSON."""
     try:
         with open(get_file_path(arquivo_json), 'r', encoding='utf-8') as f:
             conteudo = json.load(f)
@@ -28,16 +21,7 @@ def carregar_json(arquivo_json):
 
 
 def salvar_json(conteudo, arquivo_json):
-    """
-    Salva o conteúdo fornecido em um arquivo JSON.
-
-    Parâmetros:
-    - conteudo: objeto Python (dict, list, etc.) a ser salvo.
-    - arquivo_json (str): nome do arquivo JSON de destino.
-
-    Retorna:
-    - None.
-    """
+    """Salva o conteúdo fornecido em um arquivo JSON."""
     try:
         with open(get_file_path(arquivo_json), 'w', encoding='utf-8') as f:
             json.dump(conteudo, f, ensure_ascii=False, indent=4)
@@ -47,9 +31,7 @@ def salvar_json(conteudo, arquivo_json):
 
 
 def chamar_api_para_keywords(title, abstract, api_url='http://localhost:5000/llm/extract-keywords'):
-    """
-    Faz a chamada para a API e retorna a lista de palavras-chave.
-    """
+    """Faz a chamada para a API e retorna a lista de palavras-chave."""
     payload = {
         "title": title,
         "abstract": abstract
@@ -63,11 +45,12 @@ def chamar_api_para_keywords(title, abstract, api_url='http://localhost:5000/llm
         print(f"Erro ao chamar API: {e}")
         return ["indisponível"]
 
+
 def processar_lista_para_keywords(lista_objetos, arquivo_saida_json):
-    """
-    Processa a lista, adiciona Palavras-chave LLM, e salva no arquivo JSON.
-    """
+    """Processa a lista, adiciona Palavras-chave LLM, e salva no arquivo JSON."""
     resultado = []
+
+    tempo_inicio = time.time()  # Marca o tempo inicial
 
     for i, item in enumerate(lista_objetos):
         palavras_chave = ["indisponível"]
@@ -104,10 +87,16 @@ def processar_lista_para_keywords(lista_objetos, arquivo_saida_json):
         
         if (i + 1) % 10 == 0:
             salvar_json(resultado, arquivo_saida_json)
+            tempo_decorrido = time.time() - tempo_inicio
             print(f"Progresso salvo até o documento: {i+1}")
+            print(f"Tempo decorrido: {tempo_decorrido:.2f} segundos")
 
-    # Salva o resultado
+    # Salva o resultado final
     salvar_json(resultado, arquivo_saida_json)
+    tempo_total = time.time() - tempo_inicio
+    print(f"Processamento concluído. Tempo total: {tempo_total:.2f} segundos")
 
+
+# Execução
 dados = carregar_json('data/dados_amostra.json')
 processar_lista_para_keywords(dados, 'data/keywords.json')
