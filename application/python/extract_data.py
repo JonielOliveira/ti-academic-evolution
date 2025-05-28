@@ -271,11 +271,12 @@ def extrair_dados_lote(template, arquivo_entrada_json, arquivo_saida_json):
     # Salva em JSON
     salvar_json(dados, arquivo_saida_json)
 
+if __name__ == "__main__":
 
-extrair_dados_iniciais('config/sources.json', 'data/dados_iniciais.json')
-template = carregar_json('config/template.json')
-extrair_dados_lote(template, 'data/dados_iniciais.json','data/dados_completos.json')
-dados = carregar_json('data/dados_completos.json')
-verificar_completude_json(dados, template)
+    extrair_dados_iniciais('config/sources.json', 'data/dados_iniciais.json')
+    template = carregar_json('config/template.json')
+    extrair_dados_lote(template, 'data/dados_iniciais.json','data/dados_completos.json')
+    dados = carregar_json('data/dados_completos.json')
+    verificar_completude_json(dados, template)
 
-dados = carregar_json('data/dados_completos.json')
+    dados = carregar_json('data/dados_completos.json')

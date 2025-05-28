@@ -9,7 +9,7 @@ def extrair_ano_e_decada(data_str):
     except:
         return None, None
 
-def processar_dados_complementares(dados):
+def processar_dados_complementares(dados, arquivo_saida_json):
     novos_dados = []
     for item in dados:
         novo = item.copy()
@@ -23,12 +23,14 @@ def processar_dados_complementares(dados):
         novo["Arquivo Disponível"] = (bool(link_arquivo.strip()) and link_arquivo.strip() != "indisponível")
 
         novos_dados.append(novo)
-    return novos_dados
+    # Salva em JSON
+    salvar_json(novos_dados, arquivo_saida_json)
 
-# Execução principal
-entrada = 'data/dados_completos.json'
-saida = 'data/dados_ajustados.json'
+if __name__ == "__main__":
+    
+    # Execução principal
+    entrada = 'data/dados_completos.json'
+    saida = 'data/dados_ajustados.json'
 
-dados = carregar_json(entrada)
-dados_enriquecidos = processar_dados_complementares(dados)
-salvar_json(dados_enriquecidos, saida)
+    dados = carregar_json(entrada)
+    dados_enriquecidos = processar_dados_complementares(dados, saida)
