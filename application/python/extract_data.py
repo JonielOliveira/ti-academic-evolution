@@ -62,10 +62,6 @@ def extrair_dados_iniciais(arquivo_entrada_json, arquivo_saida_json):
     # Carrega os dados de fontes a partir do arquivo JSON
     fontes = carregar_json(arquivo_entrada_json)
 
-    # Se quiser manter a filtragem a partir do 6º elemento
-    # OBS.: Apenas para teste
-    fontes = fontes[5:]
-
     # Loop pelas fontes
     for fonte in fontes:
 
@@ -87,7 +83,7 @@ def extrair_dados_iniciais(arquivo_entrada_json, arquivo_saida_json):
         resultado_info = soup.find('div', class_='dadosLinha').text.strip()
 
         # Extrai número da página atual e o total de páginas
-        match = re.search(r'Exibindo \d+ de \d+ na pagina (\d+) de (\d+)', resultado_info)
+        match = re.search(r'\(página (\d+) de (\d+)\)', resultado_info)
         pagina_atual = int(match.group(1)) if match else 1
         pagina_final = int(match.group(2)) if match else 1
 
@@ -326,3 +322,5 @@ template = carregar_json('config/template.json')
 extrair_dados_lote(template, 'data/dados_iniciais.json','data/dados_completos.json')
 dados = carregar_json('data/dados_completos.json')
 verificar_completude_json(dados, template)
+
+dados = carregar_json('data/dados_completos.json')
