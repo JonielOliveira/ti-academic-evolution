@@ -134,6 +134,10 @@ def extrair_dados_iniciais(arquivo_entrada_json, arquivo_saida_json):
 
             print(f'Finalizando processo da página: {pagina} de {pagina_final}')
 
+            if (pagina) % 20 == 0:
+                salvar_json(dados, arquivo_saida_json)
+                print(f"Progresso salvo até a página: {pagina}")
+
     # Salva os dados no arquivo JSON
     salvar_json(dados, arquivo_saida_json)
 
@@ -309,10 +313,12 @@ def extrair_dados_lote(template, arquivo_entrada_json, arquivo_saida_json):
 
         print(f"Finalizando processo do documento: {i+1} de {len(fontes)}")
 
+        if (i + 1) % 100 == 0:
+            salvar_json(dados, arquivo_saida_json)
+            print(f"Progresso salvo até o documento: {i+1}")
+
     # Salva em JSON
     salvar_json(dados, arquivo_saida_json)
-
-
 
 
 extrair_dados_iniciais('config/fontes.json', 'data/dados_iniciais.json')
