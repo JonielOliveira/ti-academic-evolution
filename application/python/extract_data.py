@@ -272,7 +272,7 @@ def extrair_dados_lote(template, arquivo_entrada_json, arquivo_saida_json):
     salvar_json(dados, arquivo_saida_json)
 
 
-extrair_dados_iniciais('config/fontes.json', 'data/dados_iniciais.json')
+extrair_dados_iniciais('config/sources.json', 'data/dados_iniciais.json')
 template = carregar_json('config/template.json')
 extrair_dados_lote(template, 'data/dados_iniciais.json','data/dados_completos.json')
 dados = carregar_json('data/dados_completos.json')
