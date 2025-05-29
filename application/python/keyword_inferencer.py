@@ -1,8 +1,16 @@
 import requests
 import time
 from utils_io import carregar_json, salvar_json
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-def chamar_api_para_keywords(title, abstract, api_url='http://localhost:5000/llm/extract-keywords'):
+host = os.getenv("API_HOST", "http://localhost")
+port = os.getenv("API_PORT", "5000")
+route = "/llm/extract-keywords"
+api_url = f"{host}:{port}{route}"
+
+def chamar_api_para_keywords(title, abstract):
     """Faz a chamada para a API e retorna a lista de palavras-chave."""
     payload = {
         "title": title,
