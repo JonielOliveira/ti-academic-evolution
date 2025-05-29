@@ -1,0 +1,8 @@
+{
+  "extrair_dados_iniciais": false,
+  "extrair_dados_completos": false,
+  "verificar_completude": false,
+  "inferir_keywords": false,
+  "processar_dados_complementares": true,
+  "analisar_dados": false
+}
