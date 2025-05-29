@@ -1,7 +1,7 @@
-from utils_io import carregar_json, salvar_json
-from extract_data import extrair_dados_iniciais, extrair_dados_lote, verificar_completude_json
-from keyword_inferencer import processar_lista_para_keywords
-from transform_data import processar_dados_complementares
+from scripts.utils_io import carregar_json, salvar_json
+from scripts.extract_data import extrair_dados_iniciais, extrair_dados_lote, verificar_completude_json
+from scripts.keyword_inferencer import processar_lista_para_keywords
+from scripts.transform_data import processar_dados_complementares
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -14,6 +14,7 @@ file_path = 'sample' if ENV == 'development' else 'data'
 
 pipeline_filepath = 'config/pipeline.json'
 pipeline = carregar_json(pipeline_filepath)
+print(pipeline)
 template_filepath = 'config/template.json'
 sources_filepath = 'config/sample_sources.json' if ENV == 'development' else 'config/sources.json'
 dados_iniciais_filepath = f'{file_path}/{"dados_iniciais.json"}'

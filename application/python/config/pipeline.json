@@ -1,8 +1,8 @@
 {
-  "extrair_dados_iniciais": false,
-  "extrair_dados_completos": false,
-  "verificar_completude": false,
-  "inferir_keywords": false,
+  "extrair_dados_iniciais": true,
+  "extrair_dados_completos": true,
+  "verificar_completude": true,
+  "inferir_keywords": true,
   "processar_dados_complementares": true,
   "analisar_dados": false
 }

@@ -1,6 +1,6 @@
 import requests
 import time
-from utils_io import carregar_json, salvar_json
+from scripts.utils_io import carregar_json, salvar_json
 import os
 from dotenv import load_dotenv
 load_dotenv()

@@ -2,9 +2,11 @@ import json
 import os
 
 def get_file_path(filename):
-    """Retorna o caminho absoluto de um arquivo localizado na mesma pasta do script .py."""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(script_dir, filename)
+    """Retorna o caminho absoluto de um arquivo, relativo à raiz da aplicação (onde está app.py)."""
+    # Caminho absoluto do app.py
+    app_root = os.path.dirname(os.path.abspath(__file__))  # /scripts
+    root_dir = os.path.abspath(os.path.join(app_root, ".."))  # volta para a raiz da aplicação
+    return os.path.join(root_dir, filename)
 
 
 def carregar_json(arquivo_json):

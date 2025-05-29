@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import copy
-from utils_io import carregar_json, salvar_json
+from scripts.utils_io import carregar_json, salvar_json
 
 def extrair_dados_iniciais(arquivo_entrada_json, arquivo_saida_json):
     """

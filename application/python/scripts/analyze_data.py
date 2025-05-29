@@ -1,4 +1,4 @@
-from utils_io import carregar_json, salvar_json
+from scripts.utils_io import carregar_json, salvar_json
 import pandas as pd
 from pandas import json_normalize
 from wordcloud import WordCloud
